@@ -41,7 +41,7 @@ def get(token, topID, key):
     if token == topID.split("_")[0] and r.hgetall(topID) and r.hget(topID, key):
         return jsonify({"res": "1"})
     elif token == topID.split("_")[0] and r.hgetall(topID) and not r.hget(topID, key):
-        return jsonify({"res: -2"})
+        return jsonify({"res": "-2"})
     else:
         return jsonify({"res": "-1"})
 
