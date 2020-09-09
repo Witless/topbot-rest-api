@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def get():
+def gethelp():
     return jsonify({"TopBot api v1, endpoints": {
         "PUT": "/api/v1/auth=<string>/topID=<string>/key=<string>/value=<string>",
         "POST": "/api/v1/auth=<string>/topID=<string>/key=<string>/value=<string>",
@@ -20,7 +20,7 @@ def get():
 
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>/value=<string:value>', methods=['PUT'])
-def update(token, topID, key, value):
+def put(token, topID, key, value):
     if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
@@ -33,8 +33,8 @@ def update(token, topID, key, value):
         return jsonify({"res": "-1"})
 
 
-@app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>', methods=['GET'])
-def update(token, topID, key):
+@app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>')
+def get(token, topID, key):
     if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
@@ -47,7 +47,7 @@ def update(token, topID, key):
 
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>', methods=['PATCH'])
-def update(token, topID, key):
+def patch(token, topID, key):
     if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
