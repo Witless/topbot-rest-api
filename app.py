@@ -21,7 +21,7 @@ def gethelp():
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>/value=<string:value>', methods=['PUT'])
 def put(token, topID, key, value):
-    if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
+    if topID == "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
     if token == topID.split("_")[0] and r.hgetall(topID) and r.hget(topID, key):
@@ -35,7 +35,7 @@ def put(token, topID, key, value):
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>')
 def get(token, topID, key):
-    if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
+    if topID == "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
     if token == topID.split("_")[0] and r.hgetall(topID) and r.hget(topID, key):
@@ -48,7 +48,7 @@ def get(token, topID, key):
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>', methods=['PATCH'])
 def patch(token, topID, key):
-    if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
+    if topID == "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
     if token == topID.split("_")[0] and r.hgetall(topID) and r.hget(topID, key):
@@ -63,7 +63,7 @@ def patch(token, topID, key):
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>/value=<string:value>', methods=['POST'])
 def post(token, topID, key, value):
-    if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
+    if topID == "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
     if token == topID.split("_")[0] and r.hgetall(topID) and not r.hget(topID, key):
@@ -77,7 +77,7 @@ def post(token, topID, key, value):
 
 @app.route('/api/v1/auth=<string:token>/topID=<string:topID>/key=<string:key>', methods=['DELETE'])
 def delete(token, topID, key):
-    if topID != "tokens" or key == "channel" or key == "message" or key == "_v":
+    if topID == "tokens" or key == "channel" or key == "message" or key == "_v":
         return jsonify({"res": "-1"})
     token = r.hget("tokens", token)
     if token == topID.split("_")[0] and r.hgetall(topID) and r.hget(topID, key):
